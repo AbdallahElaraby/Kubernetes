@@ -25,7 +25,7 @@ The application is composed of several microservices, each responsible for a spe
 | 🗃️ `rediscart`               | `6379`     | Redis instance for cart caching            |
 
 
-                                                 ![image](https://github.com/user-attachments/assets/73ec10ea-f1fa-491a-bd93-2d8300d16311)
+    
 
 ---
 
