@@ -24,8 +24,7 @@ The application is composed of several microservices, each responsible for a spe
 | 🧠 `shoppingassistantservice`| `80`       | AI-powered shopping assistant              |
 | 🗃️ `rediscart`               | `6379`     | Redis instance for cart caching            |
 
-
-    
+![Shopping Assistant Diagram](shopping-assistant-diagram.png) 
 
 ---
 
