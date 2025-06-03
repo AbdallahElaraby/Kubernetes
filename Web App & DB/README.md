@@ -1,84 +1,22 @@
-🐳 Kubernetes MongoDB + Mongo Express Mini Project
-This is a simple Kubernetes project that deploys a MongoDB database along with a Mongo Express UI. It demonstrates the use of ConfigMaps, Secrets, Deployments, and Services in Kubernetes.
+# 🐳 Kubernetes MongoDB + Mongo Express
 
-🛠️ Project Structure
-This project includes:
+This project deploys a MongoDB instance with a Mongo Express UI using Kubernetes.
 
-MongoDB Deployment & Service
+## 🧱 Stack Overview
 
-Mongo Express Deployment & LoadBalancer Service
+- **MongoDB**: Backend database
+- **Mongo Express**: Web UI to interact with MongoDB
+- **Kubernetes Resources**:
+  - `ConfigMap`: MongoDB service name
+  - `Secret`: Encoded credentials
+  - `Deployments`: MongoDB and Mongo Express
+  - `Services`: Internal (MongoDB) & LoadBalancer (Mongo Express)
 
-Secrets for sensitive credentials
+## 🚀 Usage
 
-ConfigMap for configuration data shared between components
+###  Deploy all resources
+kubectl apply -f .
 
-📁 Components Explained
-✅ ConfigMap
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mongodb-configmap
-data:
-  db_url: mongo-db-service
-Used to provide the MongoDB service name to Mongo Express.
-
-🔐 Secret
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mongo-secret
-data:
-  root_username: YWJkYWxsYWg=
-  root_password: YWJkYWxsYWg=
-  web_username: YWJkYWxsYWg=
-  web_password: YWJkYWxsYWg=
-Base64 encoded credentials used in both MongoDB and Mongo Express.
-
-📦 MongoDB Deployment & Service
-Runs 2 replicas of MongoDB with environment variables sourced from the secret:
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mongo-db-deploy
-...
-MongoDB is exposed internally via:
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo-db-service
-...
-🌐 Mongo Express Deployment & LoadBalancer Service
-Runs 1 replica of Mongo Express connected to the MongoDB service using environment variables:
-
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: mongo-express-deploy
-...
-Mongo Express is exposed to external traffic through:
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: mongo-express-service
-spec:
-  type: LoadBalancer
-...
-Accessible at NodeIP:30001.
-
-🚀 How to Run
-Create all resources:
-
-kubectl apply -f <your-yaml-file>.yaml
-Access Mongo Express:
-
-Visit http://<NodeIP>:30001
-
-Login using the basic auth credentials from the secret.
-
-Check pods/services:
-
-kubectl get pods
-kubectl get svc
+Open in browser:
+http://<NodeIP>:30001
+Use the credentials from the secret (default: abdallah / abdallah).
