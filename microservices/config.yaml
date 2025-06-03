@@ -21,6 +21,21 @@ spec:
         env:
         - name: PORT
           value: "8080"
+        livenessProbe:
+          grpc:
+            port: 8080
+          periodSeconds: 5
+        readinessProbe:
+          grpc:
+            port: 8080
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -36,6 +51,7 @@ spec:
   - protocol: TCP
     port: 5000
     targetPort: 8080
+      
 ---
 
 
@@ -65,6 +81,23 @@ spec:
           value: "8080"
         - name: PRODUCT_CATALOG_SERVICE_ADDR
           value: "productcatalogservice:3550"
+        livenessProbe:
+          initialDelaySeconds: 5
+          grpc:
+            port: 8080
+          periodSeconds: 5
+        readinessProbe:
+          initialDelaySeconds: 5
+          grpc:
+            port: 8080
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -107,6 +140,21 @@ spec:
         env:
         - name: PORT
           value: "3550"
+        livenessProbe:
+          grpc:
+            port: 3550
+          periodSeconds: 5
+        readinessProbe:
+          grpc:
+            port: 3550
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -151,6 +199,22 @@ spec:
           value: "50051"
         - name : DISABLE_PROFILER
           value: "1"
+        livenessProbe:
+          grpc:
+            port: 50051
+          periodSeconds: 5
+        readinessProbe:
+          grpc:
+            port: 50051
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
+        
 ---
 apiVersion: v1
 kind: Service
@@ -196,6 +260,21 @@ spec:
           value: "7000"
         - name : DISABLE_PROFILER
           value: "1"
+        livenessProbe:
+          grpc:
+            port: 7000
+          periodSeconds: 5
+        readinessProbe:
+          grpc:
+            port: 7000
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -240,6 +319,21 @@ spec:
         env:
         - name: PORT
           value: "50051"
+        livenessProbe:
+          grpc:
+            port: 50051
+          periodSeconds: 5
+        readinessProbe:
+          grpc:
+            port: 50051
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -284,6 +378,21 @@ spec:
         env:
         - name: PORT
           value: "9555"
+        livenessProbe:
+          grpc:
+            port: 9555
+          periodSeconds: 5
+        readinessProbe:
+          grpc:
+            port: 9555
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -329,6 +438,21 @@ spec:
           value: "7070"
         - name: REDIS_ADDR
           value: "rediscart:6379"
+        livenessProbe:
+          grpc:
+            port: 7070
+          periodSeconds: 5
+        readinessProbe:
+          grpc:
+            port: 7070
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 
 ---
 apiVersion: v1
@@ -374,9 +498,28 @@ spec:
         volumeMounts:
           - mountPath: /data
             name: redis-data
+        livenessProbe:
+          tcpSocket:
+            port: 6379
+          periodSeconds: 5
+        readinessProbe:
+          tcpSocket:
+            port: 6379
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "60m" #millicore
+          memory: "164Mi" #mebibyte
+        limits:
+          cpu: "128m"
+          memory: "300Mi"
+
       volumes:
         - name: redis-data
           emptyDir: {}
+
+      
+
 
 ---
 apiVersion: v1
@@ -430,6 +573,23 @@ spec:
           value: "emailservice:5000"
         - name: PAYMENT_SERVICE_ADDR
           value: "paymentservice:50051"
+        livenessProbe:
+          initialDelaySeconds: 5
+          grpc:
+            port: 5050
+          periodSeconds: 5
+        readinessProbe:
+          initialDelaySeconds: 5
+          grpc:
+            port: 5050
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -490,6 +650,23 @@ spec:
           value: "adservice:9555"
         - name: SHOPPING_ASSISTANT_SERVICE_ADDR
           value: "shoppingassistantservice:80"
+        livenessProbe:
+          initialDelaySeconds: 5
+          grpc:
+            port: 8080
+          periodSeconds: 5
+        readinessProbe:
+          initialDelaySeconds: 5
+          grpc:
+            port: 8080
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
@@ -498,14 +675,14 @@ metadata:
   labels:
     app: frontend
 spec:
-  type: NodePort
+  type: ClusterIP
   selector:
     app: frontend
   ports:
   - protocol: TCP
     port: 80
     targetPort: 8080
-    nodePort: 30010
+    #nodePort: 30010
 ---
 
 apiVersion: apps/v1
@@ -545,6 +722,23 @@ spec:
           value: "your-instance-name"
         - name: ALLOYDB_SECRET_NAME
           value: "your-secret-name"
+        livenessProbe:
+          initialDelaySeconds: 5
+          grpc:
+            port: 80
+          periodSeconds: 5
+        readinessProbe:
+          initialDelaySeconds: 5
+          grpc:
+            port: 80
+          periodSeconds: 5
+      resources:
+        requests:
+          cpu: "100m" #millicore
+          memory: "64Mi" #mebibyte
+        limits:
+          cpu: "200m"
+          memory: "128Mi"
 
       
 ---
