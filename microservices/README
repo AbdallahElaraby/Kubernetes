@@ -1,4 +1,4 @@
-#🛍️ **Microservices Demo Application (Kubernetes)**
+# 🛍️#  **Microservices Demo Application (Kubernetes)**
 
 Welcome to the **Kubernetes-based Microservices Demo Application**!  
 This project showcases a complete microservices architecture inspired by the [Google Cloud Microservices Demo](https://github.com/GoogleCloudPlatform/microservices-demo), deployable on any Kubernetes environment including **Minikube**, **GKE**, **EKS**, or others.
