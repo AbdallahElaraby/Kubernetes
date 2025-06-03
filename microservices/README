@@ -1,0 +1,58 @@
+# 🛍️ Microservices Demo Application (Kubernetes)
+
+This repository contains the Kubernetes manifests for deploying a microservices-based e-commerce demo application. The services are based on the [Google Cloud Microservices Demo](https://github.com/GoogleCloudPlatform/microservices-demo), and this setup is intended for use in Kubernetes environments such as Minikube, GKE, or others.
+
+---
+
+## 📦 Services Overview
+
+The architecture consists of multiple services communicating over gRPC:
+
+| Service                  | Port  | Purpose                             |
+|--------------------------|-------|-------------------------------------|
+| `frontend`               | 8080  | Main web UI                         |
+| `cartservice`            | 7070  | Manages user carts                  |
+| `checkoutservice`        | 5050  | Handles order checkout              |
+| `currencyservice`        | 7000  | Converts currencies                 |
+| `emailservice`           | 8080  | Sends order confirmation emails     |
+| `paymentservice`         | 50051 | Processes payments                  |
+| `productcatalogservice`  | 3550  | Provides product information        |
+| `recommendationservice`  | 8080  | Recommends products                 |
+| `shippingservice`        | 50051 | Provides shipping estimates         |
+| `adservice`              | 9555  | Displays product ads                |
+| `rediscart`              | 6379  | Redis instance for cart caching     |
+| `shoppingassistantservice`| 80   | AI-powered shopping assistant       |
+
+---
+
+## 🚀 Deployment
+
+To deploy the application, ensure your Kubernetes cluster is running. Then apply the manifests using:
+
+```bash
+kubectl apply -f <your-files-names>.yaml
+
+
+🌐 Ingress
+This project includes an Ingress resource for routing traffic to the frontend service:
+```bash
+minikube addons enable ingress
+You also have to edit the hosts file
+vim /etc/hosts
+nodeIP   myexamplebotique.com
+http://myexamplebotique.com
+
+
+📊 Resource Limits
+All services are configured with minimal CPU and memory requirements:
+
+requests:
+  cpu: "100m"
+  memory: "64Mi"
+limits:
+  cpu: "200m"
+  memory: "128Mi"
+Redis uses slightly more memory by 
+
+🛠️ Customization
+You can extend or replace services, change resource limits, or configure horizontal pod autoscaling as needed for production environments.
